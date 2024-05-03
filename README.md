@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# Tech i used
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- React + TypeScript + Tailwind + Vite + zod + react hook form
 
-Currently, two official plugins are available:
+# components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## how to use
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+```JSX
+interface Props {
+  max: number;
+  min: number;
+  defaultValue?: number;
+  label: string;
+  dataLabel?: Array<number>;
+  onChange: (value: number) => void;
+  variant?: "primary" | "danger";
 }
+
+<Input.Slider
+  dataLabel={[60, 120]}
+  label="Heart Rate"
+  onChange={(val) => {  }}
+  max={120}
+  min={60}
+  defaultValue={60}
+/>
+
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+```JSX
+
+interface Props {
+  label: ReactNode | string;
+  icon?: ReactNode | string | null;
+  err: string | undefined;
+}
+ <Input.Text
+  err={errors?.name?.message?.toString()}
+  {...form.register("name")}
+  icon="🙋🏻‍♂️"
+  label="Name"
+/>
+
+```
+
+# run commands
+
+I have used yarn
+so yarn dev etc
+
+- "dev": "vite",
+- "build": "tsc && vite build",
+- "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+- "preview": "vite preview"

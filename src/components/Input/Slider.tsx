@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { forwardRef, useState } from "react";
 
 function calculateSliderPercentage(
@@ -17,10 +18,20 @@ interface Props {
   label: string;
   dataLabel?: Array<number>;
   onChange: (value: number) => void;
+  variant?: "primary" | "danger";
 }
 
 const Slider = forwardRef<HTMLInputElement, Props>(function Slider(
-  { min, max, onChange, defaultValue, dataLabel, label, ...props },
+  {
+    min,
+    max,
+    variant = "primary",
+    onChange,
+    defaultValue,
+    dataLabel,
+    label,
+    ...props
+  },
   ref
 ) {
   const MAX = max;
@@ -31,6 +42,10 @@ const Slider = forwardRef<HTMLInputElement, Props>(function Slider(
     Number(MIN),
     Number(MAX)
   );
+  const bgImage =
+    variant === "primary"
+      ? `linear-gradient(#298de5, #298de5)`
+      : `linear-gradient(#ed2a2a, #ed2a2a)`;
 
   return (
     <div className="my-2">
@@ -38,7 +53,13 @@ const Slider = forwardRef<HTMLInputElement, Props>(function Slider(
 
       <div className="relative mt-2">
         <div
-          className="absolute z-[-10] top-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent to-red-100"
+          className={classNames(
+            "absolute z-[-10] top-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent ",
+            {
+              "to-red-300": variant === "danger",
+              "to-blue-300": variant === "primary",
+            }
+          )}
           style={{
             height: "24px",
             width: `${width}%`,
@@ -58,10 +79,14 @@ const Slider = forwardRef<HTMLInputElement, Props>(function Slider(
           max={MAX}
           style={{
             backgroundSize: `${width}% 100%`,
+            backgroundImage: bgImage,
           }}
           value={slider}
           list="markers"
-          className="w-full"
+          className={classNames("w-full bg-gradient-to-r", {
+            "[&&::-webkit-slider-thumb]:bg-blue-500 ": variant === "primary",
+            "[&&::-webkit-slider-thumb]:bg-red-500 ": variant === "danger",
+          })}
           type="range"
         />
       </div>

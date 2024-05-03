@@ -16,17 +16,19 @@ const Select = forwardRef<HTMLSelectElement, Props>(function Text(
 
         <span className="mx-1 text-sm text-red-500">*</span>
       </label>
-      <select
-        className="outline-none  border-none bg-gray-200 p-3 rounded-md"
-        ref={ref}
-        {...props}
-      >
-        {gender.map((option) => (
-          <option key={option} value={option}>
-            {option.toUpperCase()}
-          </option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          className="outline-none w-full   border-none bg-gray-200 p-3  rounded-md"
+          ref={ref}
+          {...props}
+        >
+          {gender.map((option) => (
+            <option key={option} value={option}>
+              {option.toUpperCase()}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 });

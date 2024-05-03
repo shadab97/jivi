@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { useState } from "react";
 
-const makeApiCall = async (data: any) => {
+const makeApiCall = async (data: User) => {
   return fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -51,7 +51,9 @@ function App() {
     <div className="">
       {/* header */}
       <section className="border-b border-asklepios-gray-200   p-4">
-        <h1 className="font-bold text-base">Details</h1>
+        <h1 className="font-bold text-base">
+          {isSubmitSuccessFull ? "Preview" : "Details"}
+        </h1>
       </section>
 
       {!isSubmitSuccessFull ? (
@@ -112,6 +114,7 @@ function App() {
                 }}
                 max={120}
                 min={60}
+                defaultValue={60}
               />
 
               <Input.Slider
@@ -123,6 +126,8 @@ function App() {
                 }}
                 max={150}
                 min={120}
+                variant="danger"
+                defaultValue={120}
               />
               <Input.Text
                 err={errors?.name?.message?.toString()}

@@ -4,9 +4,10 @@ import { forwardRef, ReactNode } from "react";
 interface Props {
   label: ReactNode | string;
   icon?: ReactNode | string;
+  err: string | undefined;
 }
 const Date = forwardRef<HTMLInputElement, Props>(function Date(
-  { label, icon, ...props },
+  { label, icon, err, ...props },
   ref
 ) {
   return (
@@ -29,10 +30,9 @@ const Date = forwardRef<HTMLInputElement, Props>(function Date(
             }
           )}
           type="date"
-          name=""
-          id=""
         />
       </div>
+      <p className="text-red-500 text-xs">{err}</p>
     </div>
   );
 });

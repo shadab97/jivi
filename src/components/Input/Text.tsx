@@ -4,10 +4,11 @@ import { ReactNode, forwardRef } from "react";
 interface Props {
   label: ReactNode | string;
   icon?: ReactNode | string | null;
+  err: string | undefined;
 }
 
 const Text = forwardRef<HTMLInputElement, Props>(function Text(
-  { label, icon, ...props },
+  { label, icon, err, ...props },
   ref
 ) {
   return (
@@ -33,6 +34,7 @@ const Text = forwardRef<HTMLInputElement, Props>(function Text(
           type="text"
         />
       </div>
+      <p className="text-red-500 text-xs">{err}</p>
     </div>
   );
 });

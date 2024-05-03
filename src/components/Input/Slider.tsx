@@ -13,18 +13,19 @@ function calculateSliderPercentage(
 interface Props {
   max: number;
   min: number;
-  defaultValue: number;
+  defaultValue?: number;
   label: string;
   dataLabel?: Array<number>;
+  onChange: (value: number) => void;
 }
 
 const Slider = forwardRef<HTMLInputElement, Props>(function Slider(
-  { min, max, defaultValue, dataLabel, label, ...props },
+  { min, max, onChange, defaultValue, dataLabel, label, ...props },
   ref
 ) {
   const MAX = max;
   const MIN = min;
-  const [slider, setSlider] = useState(defaultValue);
+  const [slider, setSlider] = useState(defaultValue ?? 0);
   const width = calculateSliderPercentage(
     Number(slider),
     Number(MIN),
@@ -51,7 +52,7 @@ const Slider = forwardRef<HTMLInputElement, Props>(function Slider(
           onChange={(e) => {
             const value = e.target.valueAsNumber;
             setSlider(value);
-            // onChange(value);
+            onChange(value);
           }}
           min={MIN}
           max={MAX}
